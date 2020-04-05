@@ -1,15 +1,18 @@
 syntax = "proto3";
-package technical_exercise;
+package api;
 
 service TechnicalExerciseService {
-	rpc Add(AddRequest) returns (AddResponse);
+	rpc Add(BinaryOperationRequest) returns (BinaryOperationResponse);
+	rpc Substract(BinaryOperationRequest) returns (BinaryOperationResponse);
+	rpc Multiply(BinaryOperationRequest) returns (BinaryOperationResponse);
+	rpc Divide(BinaryOperationRequest) returns (BinaryOperationResponse);
 }
 
-message AddRequest {
-	int32 firstOperand = 1;
-	int32 secondOperand = 2;
+message BinaryOperationRequest {
+	int32 a = 1;
+	int32 b = 2;
 }
 
-message AddResponse {
+message BinaryOperationResponse {
 	int32 result = 1;
 }

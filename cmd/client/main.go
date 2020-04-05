@@ -17,11 +17,41 @@ func main() {
 	defer conn.Close()
 
 	c := pb.NewTechnicalExerciseServiceClient(conn)
-	request := &pb.AddRequest{
-		FirstOperand: 1,
-		SecondOperand: 2,
+	request := &pb.BinaryOperationRequest{
+		A:  1,
+		B: 2,
 	}
 	response, err := c.Add(context.Background(), request)
+	if err != nil {
+		log.Fatalf("Something went wrong: %v", err)
+	}
+	log.Printf("Result: %v", response.Result)
+
+	request = &pb.BinaryOperationRequest{
+		A:  1,
+		B: 2,
+	}
+	response, err = c.Substract(context.Background(), request)
+	if err != nil {
+		log.Fatalf("Something went wrong: %v", err)
+	}
+	log.Printf("Result: %v", response.Result)
+
+	request = &pb.BinaryOperationRequest{
+		A:  1,
+		B: 2,
+	}
+	response, err = c.Multiply(context.Background(), request)
+	if err != nil {
+		log.Fatalf("Something went wrong: %v", err)
+	}
+	log.Printf("Result: %v", response.Result)
+
+	request = &pb.BinaryOperationRequest{
+		A:  1,
+		B: 2,
+	}
+	response, err = c.Divide(context.Background(), request)
 	if err != nil {
 		log.Fatalf("Something went wrong: %v", err)
 	}
