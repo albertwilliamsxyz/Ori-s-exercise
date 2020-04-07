@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"golang.org/x/net/context"
 	"github.com/albertwilliamsxyz/technical-exercise/api"
 )
@@ -23,6 +24,14 @@ func (server *Server) Multiply(ctx context.Context, in *api.BinaryOperationReque
 }
 
 func (server *Server) Divide(ctx context.Context, in *api.BinaryOperationRequest) (*api.BinaryOperationResponse, error) {
+	if in.B == 0 {
+		return nil, fmt.Errorf("Division by zero")
+	}
 	result := Divide(in.A, in.B)
 	return &api.BinaryOperationResponse{Result: result}, nil
+}
+
+func (server *Server) Sum(ctx context.Context, in *api.AggregateOperationRequest) (*api.AggregateOperationResponse, error) {
+	result := Sum(in.Numbers)
+	return &api.AggregateOperationResponse{Result: result}, nil
 }

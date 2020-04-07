@@ -10,6 +10,11 @@ type binaryOperationTestItem struct {
 	want int32
 }
 
+type aggregateOperationTestItem struct {
+	numbers []int32
+	want int32
+}
+
 func TestAdd(t *testing.T) {
 	tests := []binaryOperationTestItem {
 		{0, 0, 0},
@@ -78,6 +83,25 @@ func TestDivide(t *testing.T) {
 	for _, test := range tests {
 		t.Run(fmt.Sprintf("%d,%d", test.a, test.b), func(t *testing.T) {
 			result := Divide(test.a, test.b)
+			if result != test.want {
+				t.Errorf("Got %d, want %d", result, test.want)
+			}
+		})
+	}
+}
+
+func TestSum(t *testing.T) {
+	tests := []aggregateOperationTestItem {
+		{[]int32{0, 0, 0, 0, 0}, 0},
+		{[]int32{1, 1, 1, 1}, 4},
+		{[]int32{1, 2, 3, 4, 5}, 15},
+		{[]int32{-1, -1, -1}, -3},
+		{[]int32{0}, 0},
+		{[]int32{1}, 1},
+	}
+	for _, test := range tests {
+		t.Run(fmt.Sprintf("%v", test.numbers), func(t *testing.T) {
+			result := Sum(test.numbers)
 			if result != test.want {
 				t.Errorf("Got %d, want %d", result, test.want)
 			}

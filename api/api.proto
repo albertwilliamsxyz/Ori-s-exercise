@@ -6,6 +6,7 @@ service TechnicalExerciseService {
 	rpc Substract(BinaryOperationRequest) returns (BinaryOperationResponse);
 	rpc Multiply(BinaryOperationRequest) returns (BinaryOperationResponse);
 	rpc Divide(BinaryOperationRequest) returns (BinaryOperationResponse);
+	rpc Sum(AggregateOperationRequest) returns (AggregateOperationResponse);
 }
 
 message BinaryOperationRequest {
@@ -14,5 +15,13 @@ message BinaryOperationRequest {
 }
 
 message BinaryOperationResponse {
+	int32 result = 1;
+}
+
+message AggregateOperationRequest {
+	repeated int32 numbers = 1;
+}
+
+message AggregateOperationResponse {
 	int32 result = 1;
 }
