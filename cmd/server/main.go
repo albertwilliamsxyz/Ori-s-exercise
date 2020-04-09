@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"log"
 	"net"
 	"github.com/albertwilliamsxyz/technical-exercise/api"
@@ -9,8 +10,7 @@ import (
 )
 
 func main() {
-	address := ":50051"
-	lis, err := net.Listen("tcp", address)
+	lis, err := net.Listen("tcp", os.Getenv("TECHNICAL_EXERCISE_SERVER_ADDRESS"))
 	if err != nil {
 		log.Fatalf("Something went wrong: %v", err)
 	}

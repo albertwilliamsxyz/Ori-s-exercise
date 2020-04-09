@@ -37,13 +37,15 @@ Methods:
 
 func main() {
 	client := client.Client{}
-	err := client.Connect(":50051")
+	err := client.Connect(os.Getenv("TECHNICAL_EXERCISE_SERVER_ADDRESS"))
 	if err != nil {
 		log.Fatalf("Something went wrong: %v", err)
-		os.Exit(1)
 	}
 	defer client.Disconnect()
 
+	if len(os.Args) < 2 {
+		log.Fatalf("You must pass a method\n%s", HELP)
+	}
 	method := os.Args[1]
 	arguments := os.Args[2:len(os.Args)]
 	switch method {
