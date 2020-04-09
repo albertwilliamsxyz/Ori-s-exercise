@@ -11,4 +11,5 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /technical-exercise/bin/main .
 EXPOSE 50051
-CMD ["TECHNICAL_EXERCISE_SERVER_ADDRESS=\":50051\" ./main"] 
+ENV TECHNICAL_EXERCISE_SERVER_ADDRESS=":50051"
+CMD ["./main"] 
