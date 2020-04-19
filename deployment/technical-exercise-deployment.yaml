@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: technical-exercise-deployment
+  labels:
+    app: technical-exercise
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: technical-exercise
+  template:
+    metadata:
+      labels:
+        app: technical-exercise
+    spec:
+      containers:
+        - name: technical-exercise
+          image: albertwilliamsxyz/technical-exercise:latest
+          ports:
+          - containerPort: 50051
+            protocol: TCP
